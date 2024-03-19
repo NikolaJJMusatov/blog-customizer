@@ -13,6 +13,7 @@ export type OptionType = {
 	value: string;
 	className: string;
 	optionClassName?: string;
+	name?: string;
 };
 
 export const fontFamilyOptions: OptionType[] & {
