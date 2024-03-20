@@ -19,10 +19,6 @@ const App = () => {
 	const [styleApp, setStyleApp] =
 		useState<ArticleStateType>(defaultArticleState);
 
-	function setStyleSite(data: ArticleStateType) {
-		setStyleApp(data);
-	}
-
 	return (
 		<div
 			className={clsx(styles.main)}
@@ -35,7 +31,7 @@ const App = () => {
 					'--bg-color': styleApp.backgroundColor.value,
 				} as CSSProperties
 			}>
-			<ArticleParamsForm setStyle={setStyleSite} />
+			<ArticleParamsForm setStyle={setStyleApp} />
 			<Article />
 		</div>
 	);

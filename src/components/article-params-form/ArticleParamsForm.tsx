@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
-import { useRef, useState } from 'react';
+import { useRef, useState, CSSProperties } from 'react';
 import { RadioGroup } from '..//radio-group/RadioGroup';
 import {
 	OptionType,
@@ -11,21 +11,19 @@ import {
 	fontColors,
 	backgroundColors,
 	contentWidthArr,
+	ArticleStateType,
+	ArticleParamsFormProps,
 } from 'src/constants/articleProps';
 import { Select } from '../select';
 import { Separator } from '../separator';
 import { Text } from '../text';
 import { useEscapeAndOutsideClickClose } from './hooks/useEscapeAndOutsideClickClose';
-
 import styles from './ArticleParamsForm.module.scss';
 
-/*interface ArticleParamsFormProps {
-	setStyle: React.Dispatch<React.SetStateAction<ArticleStateType>>;
-}*/
-//: React.FC<ArticleParamsFormProps>
-
-export const ArticleParamsForm = ({ setStyle }: any) => {
-	const [open, setOpen] = useState(false);
+export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
+	setStyle,
+}) => {
+	const [open, setOpen] = useState<boolean>(false);
 
 	const ref = useRef<HTMLElement>(null);
 	useEscapeAndOutsideClickClose({
@@ -39,7 +37,8 @@ export const ArticleParamsForm = ({ setStyle }: any) => {
 		[styles.container_open]: open,
 	});
 
-	const [formData, setFormData] = useState(defaultArticleState);
+	const [formData, setFormData] =
+		useState<ArticleStateType>(defaultArticleState);
 
 	function handleFontFamilyChange(fontFamilyOptionValue: OptionType) {
 		setFormData({
@@ -93,7 +92,7 @@ export const ArticleParamsForm = ({ setStyle }: any) => {
 			<ArrowButton isOpen={open} onClose={() => setOpen(!open)} />
 			<aside className={articleParamsForm} ref={ref}>
 				<form className={styles.form} onSubmit={handleSubmit}>
-					<Text as='h2' size={31} weight={800} uppercase dynamicLite>
+					<Text as='h2' size={31} weight={800} uppercase>
 						Задайте параметры
 					</Text>
 
@@ -136,7 +135,18 @@ export const ArticleParamsForm = ({ setStyle }: any) => {
 					/>
 
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' type='reset' onClick={handleReset} />
+						<Button
+							title='Сбросить'
+							type='reset'
+							onClick={handleReset}
+							style={
+								{
+									'--button-background': '#fff',
+									'--button-bg-hover': '#fff',
+									'--color-font-mix': 'difference',
+								} as CSSProperties
+							}
+						/>
 						<Button title='Применить' type='submit' />
 					</div>
 				</form>
